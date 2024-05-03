@@ -1,5 +1,7 @@
 from django.db import models
 
+from config import settings
+
 
 class Course(models.Model):
     title = models.CharField(max_length=150, verbose_name="Название курса")
@@ -7,6 +9,8 @@ class Course(models.Model):
     preview = models.ImageField(
         upload_to="materials/previews", verbose_name="Картинка", blank=True, null=True
     )
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True,
+                              verbose_name='Владелец')
 
     def __str__(self):
         return self.title
@@ -30,6 +34,8 @@ class Lesson(models.Model):
         verbose_name="курс",
         related_name="lessons",
     )
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True,
+                              verbose_name='Владелец')
 
     def __str__(self):
         return f"{self.title} курс: {self.course}"
