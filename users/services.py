@@ -27,3 +27,4 @@ def create_stripe_session(price):
         mode="payment",
     )
     return session.get('id'), session.get('url')
+
