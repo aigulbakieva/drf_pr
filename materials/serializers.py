@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from materials.models import Course, Lesson
+from materials.models import Course, Lesson, Subscription
 from materials.validators import validate_youtube
 
 
@@ -22,3 +22,10 @@ class CourseSerializer(serializers.ModelSerializer):
 
     def get_lessons_count(self, obj):
         return obj.lessons.count()
+
+    def get_is_sub(self, course):
+        user = self.context['request'].user
+        subscription = Subscription.objects.filter(course=course.id, user=user.id)
+        if subscription:
+            return True
+        return False
