@@ -8,6 +8,6 @@ from materials.models import Course
 def send_info_about_update(course_id):
     course = Course.objects.get(pk=course_id)
     sub_list = course.subscription.all()
-    user_list = [subscription.user.email for subscription in sub_list]
-    send_mail('Есть обновление', 'Курс был обновлен!', EMAIL_HOST_USER,
-              [user_list])
+    for sub in sub_list:
+        send_mail('Есть обновление', 'Курс был обновлен!', EMAIL_HOST_USER,
+                  [sub.user.email],)
