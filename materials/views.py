@@ -33,7 +33,8 @@ class CourseViewSet(ModelViewSet):
 
     def perform_update(self, serializer):
         course = serializer.save()
-        send_info_about_update.delay(course.id)
+        course_id = course.id
+        send_info_about_update.delay(course_id)
 
 
 class LessonCreateApiView(CreateAPIView):

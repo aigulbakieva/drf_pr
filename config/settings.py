@@ -135,19 +135,18 @@ CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
 CELERY_BEAT_SCHEDULE = {
     "check_last_user_login": {
         "task": "users.tasks.check_last_user_login",
-        "schedule": timedelta(minutes=1),
+        "schedule": timedelta(seconds=10),
     },
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = "your@yandex.ru"
-EMAIL_HOST_PASSWORD = "password"
-EMAIL_USE_TLS = False
+EMAIL_HOST_USER = "bakisha.a@yandex.ru"
+EMAIL_HOST_PASSWORD = "zkoykgbimwhnebpx"
 EMAIL_USE_SSL = True
-
-SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER
 
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
