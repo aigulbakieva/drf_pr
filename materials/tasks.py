@@ -15,3 +15,4 @@ def send_info_about_update(course_id):
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[sub.user.email],
         )
+
