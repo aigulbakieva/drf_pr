@@ -1,5 +1,9 @@
+import os
 from datetime import timedelta
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,8 +81,8 @@ REST_FRAMEWORK = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "drf_pr",
-        "USER": "postgres",
+        "NAME": os.getenv("DATABASES_NAME"),
+        "USER": os.getenv("DATABASES_USER"),
     }
 }
 
@@ -122,7 +126,7 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
-STRIPE_API_KEY = "sk_test_51PEJil2Le8ZYEDCxnRvPsKo9urCqaNUcy1Z8sb38mcmQ1HitQjO0Ey2GZASarQ40mCEkBFaTkoNtS0xAJV2zc2ii00E7qf70k8"
+STRIPE_API_KEY = os.getenv("STRIPE_API_KEY")
 
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_TASK_TRACK_STARTED = True
@@ -138,12 +142,12 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = "bakisha.a@yandex.ru"
-EMAIL_HOST_PASSWORD = "zkoykgbimwhnebpx"
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_SSL = True
+
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
