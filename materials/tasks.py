@@ -1,6 +1,6 @@
 from celery import shared_task
 from django.core.mail import send_mail
-from config.settings import EMAIL_HOST_USER
+from config import settings
 from materials.models import Course
 
 
@@ -12,6 +12,6 @@ def send_info_about_update(course_id):
         send_mail(
             subject='Обновление',
             message=f'Курс {sub.course.title} был обновлен!',
-            from_email=EMAIL_HOST_USER,
-            recipient_list=[sub.user.email]
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[sub.user.email],
         )

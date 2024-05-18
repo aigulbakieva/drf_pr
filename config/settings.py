@@ -1,7 +1,6 @@
 from datetime import timedelta
 from pathlib import Path
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -135,7 +134,7 @@ CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
 CELERY_BEAT_SCHEDULE = {
     "check_last_user_login": {
         "task": "users.tasks.check_last_user_login",
-        "schedule": timedelta(seconds=10),
+        "schedule": timedelta(days=1),
     },
 }
 
@@ -148,5 +147,3 @@ EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
-
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
