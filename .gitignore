@@ -1,4 +1,3 @@
-# Project exclude paths
 /env/
 __pycache__/
 *.py[cod]
